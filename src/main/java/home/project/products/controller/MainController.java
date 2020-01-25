@@ -34,8 +34,10 @@ public class MainController {
     }
 
     @GetMapping("/create")
-    public void create() {
+    public Product create(Product product) {
 
-        productRepository.save(new Product(2L, "Vit'ka"));
+        logger.error("Method create()");
+        logger.error("save product: " + product);
+        return productRepository.save(product);
     }
 }
