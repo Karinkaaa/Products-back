@@ -4,10 +4,7 @@ import home.project.products.entities.Product;
 import home.project.products.repo.ProductRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -33,8 +30,8 @@ public class MainController {
         return productRepository.findAll();
     }
 
-    @GetMapping("/create")
-    public Product create(Product product) {
+    @PostMapping
+    public Product create(@RequestBody Product product) {
 
         logger.error("Method create()");
         logger.error("save product: " + product);
