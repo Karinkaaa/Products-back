@@ -4,6 +4,12 @@ target/
 !**/src/main/**
 !**/src/test/**
 
+node_modules
+mvnw
+mvnw.cmd
+.mvn
+products.iml
+
 ### STS ###
 .apt_generated
 .classpath
