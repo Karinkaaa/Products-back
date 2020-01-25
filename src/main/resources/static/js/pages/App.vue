@@ -2,31 +2,34 @@
     <div>
         Hello, Bus!
 
-        <div>
-            {{ products }}
+        <div v-for="product in products">
+            {{ product }}
         </div>
         <button v-on:click="click">
-            butt
+            save
         </button>
         <div>
             {{ text }}
         </div>
         <input v-model="text"/>
         <test name="Jajaja"></test>
+        <user></user>
     </div>
 </template>
 
 <script>
     import {productApi} from '../api.js';
     import Test from "./Test.vue";
+    import User from "./User.vue";
 
     console.log(productApi);
 
     export default {
         components: {
-            Test
+            Test,
+            User
         },
-        data: function () {
+        data() {
             return {
                 text: "kiss",
                 products: null
