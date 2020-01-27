@@ -1,18 +1,45 @@
 <template>
     <div>
-        Hello, Bus!
+        <p>Hello, Bus!</p>
 
         <div v-for="product in products">
             {{ product }}
-        </div>
-        <button v-on:click="click">
-            save
-        </button>
+        </div>&nbsp;
+
         <div>
-            {{ text }}
+            <p> {{ name }} </p>
         </div>
-        <input v-model="text"/>
-        <test name="Jajaja"></test>
+
+        <div>
+            <input v-model="name"/>
+            <button v-on:click="save">
+                save
+            </button>
+        </div>&nbsp;
+
+        <div>
+            ID:
+            <input type="number" v-model="id"/>
+        </div>
+        <div>
+            New name:
+            <input type="text" v-model="name"/>
+
+            <button v-on:click="update">
+                update
+            </button>
+        </div>&nbsp;
+
+        <div>
+            ID:
+            <input type="number" v-model="id"/>
+
+            <button v-on:click="getOne">
+                search
+            </button>
+        </div>
+
+        <test name="test"></test>&nbsp;
         <user></user>
     </div>
 </template>
@@ -31,7 +58,8 @@
         },
         data() {
             return {
-                text: "kiss",
+                id: 0,
+                name: "product name",
                 products: null
             };
         },
@@ -43,19 +71,28 @@
                     this.products = response.body;
                 });
             },
-            click() {
-                console.log("click click click");
+            getOne() {
 
-                productApi.save({}, {id: Math.floor(Math.random() * 100), name: this.text}).then(
+                productApi.get({id: this.id}).then(response => {
+                        console.log(response);
+                        this.products = [response.body];
+                    }
+                );
+            },
+            save() {
+
+                productApi.save({}, {id: Math.floor(Math.random() * 100), name: this.name}).then(
+                    response => {
+                        console.log(response);
+                        this.products = [response.body];
+                    }
+                );
+            },
+            update() {
+
+                productApi.update({id: this.id}, {id: this.id, name: this.name}).then(
                     response => console.log(response)
                 );
-
-
-                // this.$http.post(`/products/create?id=${Math.floor(Math.random() * 100)}&name=${this.text}`)
-                //     .then(response => {
-                //         console.log(response);
-                //         this.fetchProducts();
-                //     });
             }
         },
         mounted() {

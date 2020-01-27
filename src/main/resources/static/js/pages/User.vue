@@ -1,6 +1,6 @@
 <template>
     <div>
-        User component
+        <div>User Vue</div>&nbsp;
 
         <div v-for="user in users">{{user}}</div>
         <input type="text" v-model="name"/>
