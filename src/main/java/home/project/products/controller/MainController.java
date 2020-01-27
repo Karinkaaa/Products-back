@@ -6,8 +6,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.constraints.NotNull;
 import java.util.List;
+import java.util.Random;
 
 @RestController
 @RequestMapping("/products")
@@ -43,7 +43,9 @@ public class MainController {
 
         logger.warn("Method create()");
         logger.warn("save product: " + product);
-
+        long leftLimit = 1L;
+        long rightLimit = 100L;
+        product.setId(leftLimit + (long) (Math.random() * (rightLimit - leftLimit)));
         return productRepository.save(product);
     }
 
@@ -54,5 +56,12 @@ public class MainController {
 
         product.setId(id);
         return productRepository.save(product);
+    }
+
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable Long id) {
+
+        logger.warn("Method delete()");
+        productRepository.deleteById(id);
     }
 }

@@ -39,7 +39,7 @@
             </button>
         </div>
 
-        <test name="test"></test>&nbsp;
+        <test name="test" ></test>&nbsp;
         <user></user>
     </div>
 </template>
