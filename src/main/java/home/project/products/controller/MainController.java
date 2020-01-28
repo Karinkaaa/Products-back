@@ -7,7 +7,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Random;
 
 @RestController
 @RequestMapping("/products")
@@ -25,7 +24,7 @@ public class MainController {
     @GetMapping
     public List<Product> findAll(Product product) {
 
-        logger.warn("Method findAll()");
+        logger.warn("Method findAll() in Product");
         logger.warn(String.valueOf(product));
 
         return productRepository.findAll();
@@ -34,17 +33,19 @@ public class MainController {
     @GetMapping("/{id}")
     public Product findById(@PathVariable Long id) {
 
-        logger.warn("Method findById()" + "\nID: " + id);
+        logger.warn("Method findById()" + " in Product\nID: " + id);
         return productRepository.findById(id).get();
     }
 
     @PostMapping
-    public Product create(@RequestBody Product product) {
+    public Product save(@RequestBody Product product) {
 
-        logger.warn("Method create()");
+        logger.warn("Method save() in Product");
         logger.warn("save product: " + product);
+
         long leftLimit = 1L;
         long rightLimit = 100L;
+
         product.setId(leftLimit + (long) (Math.random() * (rightLimit - leftLimit)));
         return productRepository.save(product);
     }
@@ -52,7 +53,7 @@ public class MainController {
     @PutMapping("/{id}")
     public Product update(@PathVariable Long id, @RequestBody Product product) {
 
-        logger.warn("Method update()");
+        logger.warn("Method update() in Product");
 
         product.setId(id);
         return productRepository.save(product);
@@ -61,7 +62,7 @@ public class MainController {
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Long id) {
 
-        logger.warn("Method delete()");
+        logger.warn("Method delete() in Product");
         productRepository.deleteById(id);
     }
 }

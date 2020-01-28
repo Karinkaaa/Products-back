@@ -1,7 +1,7 @@
 import Vue from 'vue';
-import ProductPage from "./pages/ProductPage.vue";
+import UserPage from "./pages/UserPage.vue";
 
 const app = new Vue({
     el: '#app',
-    render: a => a(ProductPage)
+    render: a => a(UserPage)
 });

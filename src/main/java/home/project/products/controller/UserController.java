@@ -28,10 +28,39 @@ public class UserController {
         return userRepo.findAll();
     }
 
+    @GetMapping("/{id}")
+    public User findById(@PathVariable Long id) {
+
+        logger.warn("Method findById() in User");
+        return userRepo.findById(id).get();
+    }
+
     @PostMapping
     public User save(@RequestBody User user) {
 
-        logger.warn("Method save()");
+        logger.warn("Method save() in User");
+        logger.warn("save user: " + user);
+
+        long leftLimit = 1L;
+        long rightLimit = 100L;
+
+        user.setId(leftLimit + (long) (Math.random() * (rightLimit - leftLimit)));
         return userRepo.save(user);
+    }
+
+    @PutMapping("/{id}")
+    public User update(@PathVariable Long id, @RequestBody User user) {
+
+        logger.warn("Method update() in User");
+
+        user.setId(id);
+        return userRepo.save(user);
+    }
+
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable Long id) {
+
+        logger.warn("Method delete() in User");
+        userRepo.deleteById(id);
     }
 }

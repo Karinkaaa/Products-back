@@ -9,16 +9,15 @@
 </template>
 
 <script>
-
     export default {
         props: ["items"],
         methods: {
             update(item) {
-                console.log("update Product item: ", item, this.items);
+                console.log("update User item: ", item);
                 this.$emit("update-item", item);
             },
             remove(item) {
-                console.log("remove Product item: ", item);
+                console.log("remove User item: ", item);
                 this.$emit("remove-item", item);
             }
         }

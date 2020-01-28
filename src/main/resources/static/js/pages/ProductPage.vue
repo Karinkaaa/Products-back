@@ -28,6 +28,12 @@
             }
         },
         methods: {
+            fetchProducts() {
+                productApi.get().then(response => {
+                    console.log(response);
+                    this.products = response.body;
+                });
+            },
             create() {
                 console.log("create() PP");
                 this.product = {};
@@ -36,14 +42,9 @@
                 console.log("update() PP: ", item);
                 this.product = item;
             },
-            fetchProducts() {
-                productApi.get().then(response => {
-                    console.log(response);
-                    this.products = response.body;
-                });
-            },
             remove(item) {
-                console.log("remove item PP: ", item);
+                console.log("remove() item PP: ", item);
+
                 productApi.delete({id: item.id}).then(response => {
                     console.log(response);
                     let index = this.products.findIndex(({id}) => id === item.id);
@@ -51,7 +52,7 @@
                 });
             },
             save(item) {
-                console.log("save item PP: ", item);
+                console.log("save() item PP: ", item);
 
                 if (item.id) {
                     productApi.update({id: item.id}, item).then(response => {
