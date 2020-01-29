@@ -1,8 +1,9 @@
 <template>
     <div>
         <button v-on:click="create">CREATE</button>
-        <user :item="user" v-on:save-item="save"/>
+        <user v-if="user" :item="user" v-on:save-item="save"/>
         <user-list
+                v-if="!user"
                 :items="users"
                 v-on:update-item="update"
                 v-on:remove-item="remove"

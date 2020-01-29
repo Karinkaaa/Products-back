@@ -1,9 +1,9 @@
 <template>
-    <div>
-        <p> ID: {{ item.id }} </p>
-        <input type="text" v-model="item.name"/>
-        <button v-on:click="save">SAVE</button>
-    </div>
+    <v-container>
+        <p v-if="item.id"> ID: {{ item.id }} </p>
+        <v-text-field type="text" v-model="item.name"/>
+        <v-btn @click="save">SAVE</v-btn>
+    </v-container>
 </template>
 
 <script>
@@ -21,4 +21,7 @@
 
 <style scoped>
 
+    #asd {
+        background-color: cornflowerblue;
+    }
 </style>
