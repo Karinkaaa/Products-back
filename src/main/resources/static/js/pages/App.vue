@@ -40,9 +40,7 @@
         </v-app-bar>
 
         <v-content>
-            <v-content>
                 <router-view></router-view>
-            </v-content>
         </v-content>
         <v-footer
                 color="indigo"

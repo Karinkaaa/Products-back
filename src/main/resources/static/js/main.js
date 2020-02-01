@@ -12,6 +12,10 @@ Vue.use(Vuetify);
 const app = new Vue({
     el: '#app',
     render: a => a(App),
-    vuetify: new Vuetify({}),
+    vuetify: new Vuetify({
+        icons: {
+            iconfont: 'mdiSvg',
+        },
+    }),
     router
 });

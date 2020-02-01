@@ -1,5 +1,5 @@
 <template>
-    <v-container>
+    <v-container class="pa-12">
         <p v-if="item.id"> ID: {{ item.id }} </p>
         <v-text-field type="text" v-model="item.name"/>
         <v-btn @click="save">SAVE</v-btn>

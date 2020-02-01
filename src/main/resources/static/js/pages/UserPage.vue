@@ -1,13 +1,15 @@
 <template>
     <div>
-        <button v-on:click="create">CREATE</button>
-        <user v-if="user" :item="user" v-on:save-item="save"/>
-        <user-list
-                v-if="!user"
-                :items="users"
-                v-on:update-item="update"
-                v-on:remove-item="remove"
-        />
+        <v-container class="pa-12">
+            <v-btn class="ma-12" depressed large color="primary" v-on:click="create">CREATE USER</v-btn>
+            <user v-if="user" :item="user" v-on:save-item="save"/>
+            <user-list
+                    v-if="!user"
+                    :items="users"
+                    v-on:update-item="update"
+                    v-on:remove-item="remove"
+            />
+        </v-container>
     </div>
 </template>
 

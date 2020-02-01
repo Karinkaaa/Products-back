@@ -1,10 +1,31 @@
 <template>
     <div>
-        <div v-for="item in items">
-            {{ item.id }} {{ item.name }}
-            <button v-on:click="update(item)">UPDATE</button>
-            <button v-on:click="remove(item)">DELETE</button>
-        </div>
+        <v-simple-table>
+            <template v-slot:default>
+                <thead class="blue-grey">
+                <tr class="py-xl-10">
+                    <th class="text-left">ID</th>
+                    <th class="text-left">Name</th>
+                    <th class="text-left">AGE</th>
+                    <th class="text-left">UPDATE</th>
+                    <th class="text-left">REMOVE</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr v-for="item in items">
+                    <td>{{ item.id }}</td>
+                    <td>{{ item.name }}</td>
+                    <td>{{ item.age }}</td>
+                    <td>
+                        <v-btn v-on:click="update(item)">update</v-btn>
+                    </td>
+                    <td>
+                        <v-btn v-on:click="remove(item)">remove</v-btn>
+                    </td>
+                </tr>
+                </tbody>
+            </template>
+        </v-simple-table>
     </div>
 </template>
 
