@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/api/products")
 public class MainController {
 
@@ -43,10 +44,6 @@ public class MainController {
         logger.warn("Method save() in Product");
         logger.warn("save product: " + product);
 
-        long leftLimit = 1L;
-        long rightLimit = 100L;
-
-        product.setId(leftLimit + (long) (Math.random() * (rightLimit - leftLimit)));
         return productRepository.save(product);
     }
 

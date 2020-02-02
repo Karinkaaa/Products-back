@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/api/users")
 public class UserController {
 
@@ -41,10 +42,6 @@ public class UserController {
         logger.warn("Method save() in User");
         logger.warn("save user: " + user);
 
-        long leftLimit = 1L;
-        long rightLimit = 100L;
-
-        user.setId(leftLimit + (long) (Math.random() * (rightLimit - leftLimit)));
         return userRepo.save(user);
     }
 

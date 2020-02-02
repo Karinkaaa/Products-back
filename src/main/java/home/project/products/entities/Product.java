@@ -8,6 +8,7 @@ public class Product {
 
     @Id
     private Long id;
+
     private String name;
 
     public Product() {
