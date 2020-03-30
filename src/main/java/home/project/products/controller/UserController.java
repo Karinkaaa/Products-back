@@ -13,8 +13,7 @@ import java.util.List;
 @RequestMapping("/api/users")
 public class UserController {
 
-    private Logger logger = LoggerFactory.getLogger(UserController.class.getName());
-
+    private Logger logger = LoggerFactory.getLogger(getClass().getName());
     private final UserRepo userRepo;
 
     public UserController(UserRepo userRepo) {
@@ -59,5 +58,19 @@ public class UserController {
 
         logger.warn("Method delete() in User");
         userRepo.deleteById(id);
+    }
+
+    @GetMapping("/profile")
+    public User getProfile(@RequestParam String email, @RequestParam String password) {
+
+        logger.warn("Method getProfile() in User");
+        return userRepo.getUserByEmailAndPassword(email, password);
+    }
+
+    @GetMapping("/search")
+    public List<User> getUsersByName(@RequestParam String name) {
+
+        logger.warn("Method getUsersByName() in User, " + name);
+        return userRepo.findByFirstNameLike(name);
     }
 }

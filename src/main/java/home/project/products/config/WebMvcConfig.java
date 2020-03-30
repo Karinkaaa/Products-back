@@ -1,4 +1,4 @@
-package home.project.products;
+package home.project.products.config;
 
 import org.springframework.boot.web.server.ErrorPage;
 import org.springframework.boot.web.server.WebServerFactoryCustomizer;

@@ -11,8 +11,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class ProductModelListener extends AbstractMongoEventListener<Product> {
 
-    private Logger logger = LoggerFactory.getLogger(ProductModelListener.class.getName());
-
+    private Logger logger = LoggerFactory.getLogger(getClass().getName());
     private SequenceGeneratorService sequenceGenerator;
 
     @Autowired
@@ -23,7 +22,7 @@ public class ProductModelListener extends AbstractMongoEventListener<Product> {
     @Override
     public void onBeforeConvert(BeforeConvertEvent<Product> event) {
 
-        logger.warn("onBeforeConvert");
+        logger.warn("onBeforeConvert" + event);
 
         if ((event.getSource().getId() == null) || event.getSource().getId() < 1) {
             event.getSource().setId(sequenceGenerator.generateSequence(Product.class.getName()));

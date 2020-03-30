@@ -11,21 +11,20 @@ import java.util.List;
 @RestController
 @CrossOrigin
 @RequestMapping("/api/products")
-public class MainController {
+public class ProductController {
 
-    private Logger logger = LoggerFactory.getLogger(MainController.class.getName());
-
+    private Logger logger = LoggerFactory.getLogger(getClass().getName());
     private final ProductRepository productRepository;
 
-    public MainController(ProductRepository productRepository) {
-        logger.warn("MainController()");
+    public ProductController(ProductRepository productRepository) {
+        logger.warn("ProductController()");
         this.productRepository = productRepository;
     }
 
     @GetMapping
     public List<Product> findAll(Product product) {
 
-        logger.warn("Method findAll() in Product");
+        logger.warn("Method findAll() in ProductController");
         logger.warn(String.valueOf(product));
 
         return productRepository.findAll();
@@ -34,14 +33,14 @@ public class MainController {
     @GetMapping("/{id}")
     public Product findById(@PathVariable Long id) {
 
-        logger.warn("Method findById()" + " in Product\nID: " + id);
+        logger.warn("Method findById()" + " in ProductController\nID: " + id);
         return productRepository.findById(id).get();
     }
 
     @PostMapping
     public Product save(@RequestBody Product product) {
 
-        logger.warn("Method save() in Product");
+        logger.warn("Method save() in ProductController");
         logger.warn("save product: " + product);
 
         return productRepository.save(product);
@@ -50,7 +49,7 @@ public class MainController {
     @PutMapping("/{id}")
     public Product update(@PathVariable Long id, @RequestBody Product product) {
 
-        logger.warn("Method update() in Product");
+        logger.warn("Method update() in ProductController");
 
         product.setId(id);
         return productRepository.save(product);
@@ -59,7 +58,7 @@ public class MainController {
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Long id) {
 
-        logger.warn("Method delete() in Product");
+        logger.warn("Method delete() in ProductController");
         productRepository.deleteById(id);
     }
 }

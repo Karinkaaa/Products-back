@@ -11,8 +11,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class UserModelListener extends AbstractMongoEventListener<User> {
 
-    private Logger logger = LoggerFactory.getLogger(ProductModelListener.class.getName());
-
+    private Logger logger = LoggerFactory.getLogger(getClass().getName());
     private SequenceGeneratorService sequenceGenerator;
 
     @Autowired
