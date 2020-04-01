@@ -31,14 +31,14 @@ public class UserController {
     @GetMapping("/{id}")
     public User findById(@PathVariable Long id) {
 
-        logger.warn("Method findById() in User");
+        logger.warn("Method findById() in UserController");
         return userRepo.findById(id).get();
     }
 
     @PostMapping
     public User save(@RequestBody User user) {
 
-        logger.warn("Method save() in User");
+        logger.warn("Method save() in UserController");
         logger.warn("save user: " + user);
 
         return userRepo.save(user);
@@ -47,7 +47,7 @@ public class UserController {
     @PutMapping("/{id}")
     public User update(@PathVariable Long id, @RequestBody User user) {
 
-        logger.warn("Method update() in User");
+        logger.warn("Method update() in UserController");
 
         user.setId(id);
         return userRepo.save(user);
@@ -56,7 +56,7 @@ public class UserController {
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Long id) {
 
-        logger.warn("Method delete() in User");
+        logger.warn("Method delete() in UserController");
         userRepo.deleteById(id);
     }
 
@@ -70,7 +70,7 @@ public class UserController {
     @GetMapping("/search")
     public List<User> getUsersByName(@RequestParam String name) {
 
-        logger.warn("Method getUsersByName() in User, " + name);
+        logger.warn("Method getUsersByName() in UserController, " + name);
         return userRepo.findByFirstNameLike(name);
     }
 }
