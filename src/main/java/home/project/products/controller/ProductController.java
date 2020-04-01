@@ -1,7 +1,7 @@
 package home.project.products.controller;
 
 import home.project.products.entities.Product;
-import home.project.products.repo.ProductRepository;
+import home.project.products.repo.ProductRepo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
@@ -14,11 +14,11 @@ import java.util.List;
 public class ProductController {
 
     private Logger logger = LoggerFactory.getLogger(getClass().getName());
-    private final ProductRepository productRepository;
+    private final ProductRepo productRepo;
 
-    public ProductController(ProductRepository productRepository) {
+    public ProductController(ProductRepo productRepo) {
         logger.warn("ProductController()");
-        this.productRepository = productRepository;
+        this.productRepo = productRepo;
     }
 
     @GetMapping
@@ -27,14 +27,14 @@ public class ProductController {
         logger.warn("Method findAll() in ProductController");
         logger.warn(String.valueOf(product));
 
-        return productRepository.findAll();
+        return productRepo.findAll();
     }
 
     @GetMapping("/{id}")
     public Product findById(@PathVariable Long id) {
 
         logger.warn("Method findById()" + " in ProductController\nID: " + id);
-        return productRepository.findById(id).get();
+        return productRepo.findById(id).get();
     }
 
     @PostMapping
@@ -43,7 +43,7 @@ public class ProductController {
         logger.warn("Method save() in ProductController");
         logger.warn("save product: " + product);
 
-        return productRepository.save(product);
+        return productRepo.save(product);
     }
 
     @PutMapping("/{id}")
@@ -52,13 +52,20 @@ public class ProductController {
         logger.warn("Method update() in ProductController");
 
         product.setId(id);
-        return productRepository.save(product);
+        return productRepo.save(product);
     }
 
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Long id) {
 
         logger.warn("Method delete() in ProductController");
-        productRepository.deleteById(id);
+        productRepo.deleteById(id);
+    }
+
+    @GetMapping("/search")
+    public List<Product> getProductsByName(@RequestParam String name) {
+
+        logger.warn("Method getProductsByName() in ProductController, " + name);
+        return productRepo.findByNameContainingIgnoreCase(name);
     }
 }
