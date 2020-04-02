@@ -22,10 +22,9 @@ public class ProductController {
     }
 
     @GetMapping
-    public List<Product> findAll(Product product) {
+    public List<Product> findAll() {
 
         logger.warn("Method findAll() in ProductController");
-        logger.warn(String.valueOf(product));
 
         return productRepo.findAll();
     }

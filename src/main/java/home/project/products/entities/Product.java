@@ -1,12 +1,13 @@
 package home.project.products.entities;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+import javax.persistence.*;
 
-@Document(collection = "products")
+@Entity
+@Table
 public class Product {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     private String name;

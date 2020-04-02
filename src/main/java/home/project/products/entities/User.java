@@ -1,14 +1,14 @@
 package home.project.products.entities;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
-
+import javax.persistence.*;
 import java.util.Objects;
 
-@Document(collection = "users")
+@Entity
+@Table(name = "usr")
 public class User {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     private String firstName;
