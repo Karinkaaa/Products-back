@@ -1,6 +1,11 @@
 package home.project.products.entities;
 
 import javax.persistence.*;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
+
+import static home.project.products.ProductsApplication.IMAGE_PATTERN;
 
 @Entity
 @Table
@@ -10,8 +15,13 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @NotBlank
     private String name;
+
+    @DecimalMin("1.00")
     private Double price;
+
+    @Pattern(regexp = IMAGE_PATTERN)
     private String image;
 
     public Product() {

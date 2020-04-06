@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -36,7 +37,7 @@ public class UserController {
     }
 
     @PostMapping
-    public User save(@RequestBody User user) {
+    public User save(@Valid @RequestBody User user) {
 
         logger.warn("Method save() in UserController");
         logger.warn("save user: " + user);
@@ -45,7 +46,7 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
-    public User update(@PathVariable Long id, @RequestBody User user) {
+    public User update(@PathVariable Long id, @Valid @RequestBody User user) {
 
         logger.warn("Method update() in UserController");
 
@@ -61,16 +62,16 @@ public class UserController {
     }
 
     @GetMapping("/profile")
-    public User getProfile(@RequestParam String email, @RequestParam String password) {
+    public User getProfile(@Valid @RequestParam String email, @Valid @RequestParam String password) {
 
         logger.warn("Method getProfile() in User");
         return userRepo.getUserByEmailAndPassword(email, password);
     }
 
     @GetMapping("/search")
-    public List<User> getUsersByName(@RequestParam String name) {
+    public List<User> getUsersByName(@Valid @RequestParam String name) {
 
         logger.warn("Method getUsersByName() in UserController, " + name);
-        return userRepo.findByFirstNameLike(name);
+        return userRepo.findByFirstNameOrLastNameLike(name.toLowerCase());
     }
 }

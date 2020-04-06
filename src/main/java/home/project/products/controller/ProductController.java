@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -37,7 +38,7 @@ public class ProductController {
     }
 
     @PostMapping
-    public Product save(@RequestBody Product product) {
+    public Product save(@Valid @RequestBody Product product) {
 
         logger.warn("Method save() in ProductController");
         logger.warn("save product: " + product);
@@ -46,7 +47,7 @@ public class ProductController {
     }
 
     @PutMapping("/{id}")
-    public Product update(@PathVariable Long id, @RequestBody Product product) {
+    public Product update(@PathVariable Long id, @Valid @RequestBody Product product) {
 
         logger.warn("Method update() in ProductController");
 
@@ -62,7 +63,7 @@ public class ProductController {
     }
 
     @GetMapping("/search")
-    public List<Product> getProductsByName(@RequestParam String name) {
+    public List<Product> getProductsByName(@Valid @RequestParam String name) {
 
         logger.warn("Method getProductsByName() in ProductController, " + name);
         return productRepo.findByNameContainingIgnoreCase(name);

@@ -1,7 +1,14 @@
 package home.project.products.entities;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import java.util.Objects;
+
+import static home.project.products.ProductsApplication.IMAGE_PATTERN;
+import static home.project.products.ProductsApplication.PHONE_PATTERN;
 
 @Entity
 @Table(name = "usr")
@@ -11,11 +18,22 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @NotBlank
     private String firstName;
+
+    @NotBlank
     private String lastName;
+
+    @Pattern(regexp = PHONE_PATTERN)
     private String phoneNumber;
+
+    @Email
     private String email;
+
+    @Pattern(regexp = IMAGE_PATTERN)
     private String photo;
+
+    @Size(min = 8, max = 24)
     private String password;
 
     public User() {
