@@ -4,10 +4,13 @@ import home.project.products.entities.User;
 import home.project.products.repo.UserRepo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.List;
 
 @RestController
 @CrossOrigin
@@ -23,10 +26,17 @@ public class UserController {
     }
 
     @GetMapping
-    public List<User> findAll() {
+    public Page<User> findAll(
+            @RequestParam String filteredName,
+            @PageableDefault(sort = {"id"}, direction = Sort.Direction.DESC) Pageable pageable) {
 
-        logger.warn("Method findAll()");
-        return userRepo.findAll();
+        logger.warn("FilteredName: " + filteredName);
+        logger.warn("Method findAll() " + pageable);
+
+        if (filteredName.length() > 0) {
+            return userRepo.findByFirstNameOrLastNameLike(filteredName.toLowerCase(), pageable);
+        }
+        return userRepo.findAll(pageable);
     }
 
     @GetMapping("/{id}")
@@ -66,12 +76,5 @@ public class UserController {
 
         logger.warn("Method getProfile() in User");
         return userRepo.getUserByEmailAndPassword(email, password);
-    }
-
-    @GetMapping("/search")
-    public List<User> getUsersByName(@Valid @RequestParam String name) {
-
-        logger.warn("Method getUsersByName() in UserController, " + name);
-        return userRepo.findByFirstNameOrLastNameLike(name.toLowerCase());
     }
 }

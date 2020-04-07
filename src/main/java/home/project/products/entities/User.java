@@ -1,10 +1,7 @@
 package home.project.products.entities;
 
 import javax.persistence.*;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 import java.util.Objects;
 
 import static home.project.products.ProductsApplication.IMAGE_PATTERN;
@@ -18,7 +15,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @NotBlank
+    @NotEmpty
     private String firstName;
 
     @NotBlank
