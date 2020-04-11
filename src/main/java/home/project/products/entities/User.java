@@ -25,6 +25,7 @@ public class User {
     private String phoneNumber;
 
     @Email
+    @Column(name = "email", unique = true)
     private String email;
 
     @Pattern(regexp = IMAGE_PATTERN)

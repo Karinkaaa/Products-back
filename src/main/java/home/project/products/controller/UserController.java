@@ -5,6 +5,7 @@ import home.project.products.repo.UserRepo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
@@ -36,7 +37,14 @@ public class UserController {
         if (filteredName.length() > 0) {
             return userRepo.findByFirstNameOrLastNameLike(filteredName.toLowerCase(), pageable);
         }
-        return userRepo.findAll(pageable);
+
+        Page<User> page = userRepo.findAll(pageable);
+
+        if (page.isEmpty() && !page.isFirst()) {
+            return userRepo.findAll(PageRequest.of(0, pageable.getPageSize(), pageable.getSort()));
+        }
+
+        return page;
     }
 
     @GetMapping("/{id}")
